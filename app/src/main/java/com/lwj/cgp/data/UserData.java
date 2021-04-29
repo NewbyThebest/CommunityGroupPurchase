@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.data;
 
 public class UserData {
     public String uid;

@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.buyer;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-public class GoodsDetailActivity extends BaseActivity{
+import com.lwj.cgp.R;
+import com.lwj.cgp.base.BaseActivity;
+
+public class GoodsDetailActivity extends BaseActivity {
     private ImageView mIvBigImg;
     private TextView mTvPrice;
     private TextView mTvCount;

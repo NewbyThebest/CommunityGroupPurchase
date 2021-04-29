@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
+
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.R;
 
 
 public class ResetPswActivity extends BaseActivity {

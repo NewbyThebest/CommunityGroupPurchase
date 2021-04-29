@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.base;
 
 import android.app.AlertDialog;
 import android.content.Context;

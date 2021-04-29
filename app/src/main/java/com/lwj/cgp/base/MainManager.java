@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.base;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -25,7 +25,7 @@ public class MainManager {
         return manager;
     }
 
-    void initRetrofit(){
+    public void initRetrofit(){
         String BASE_URL = "http://" + Constants.BASE_IP + "/EasyGo/Data/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

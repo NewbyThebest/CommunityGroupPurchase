@@ -1,26 +1,20 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
+
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.R;
 
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
@@ -92,7 +86,7 @@ public class ForgetPswActivity extends BaseActivity implements View.OnClickListe
                 //成功回调
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     //提交短信、语音验证码成功
-                    Intent intent = new Intent(ForgetPswActivity.this,ResetPswActivity.class);
+                    Intent intent = new Intent(ForgetPswActivity.this, ResetPswActivity.class);
                     startActivity(intent);
                     finish();
                 } else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {

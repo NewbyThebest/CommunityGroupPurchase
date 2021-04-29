@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.buyer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,24 +10,27 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.lwj.cgp.data.GoodsData;
+import com.lwj.cgp.R;
 
 import java.util.List;
 
-public class ChatRvAdapter extends RecyclerView.Adapter<ChatRvAdapter.MyHolder> {
+public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
 
-    private List<ChatData> mList;
+    private List<GoodsData> mList;
     private OnItemClickListener mOnItemClickListener;
 
-    public ChatRvAdapter(List<ChatData> list) {
+    public CarRvAdapter(List<GoodsData> list) {
         mList = list;
     }
 
-    public void setList(List<ChatData> mList) {
+    public void setList(List<GoodsData> mList) {
         this.mList = mList;
     }
 
     public interface OnItemClickListener{
-        public void onItemClick(ChatData data);
+        public void onItemClick(GoodsData data);
+        public void onItemRemoveClick(GoodsData data);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -37,7 +40,7 @@ public class ChatRvAdapter extends RecyclerView.Adapter<ChatRvAdapter.MyHolder> 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_chat, parent, false);
+                .inflate(R.layout.item_car, parent, false);
         MyHolder holder = new MyHolder(view);
 
         return holder;
@@ -45,7 +48,7 @@ public class ChatRvAdapter extends RecyclerView.Adapter<ChatRvAdapter.MyHolder> 
 
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-        ChatData data = mList.get(position);
+        GoodsData data = mList.get(position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +57,17 @@ public class ChatRvAdapter extends RecyclerView.Adapter<ChatRvAdapter.MyHolder> 
                 }
             }
         });
-        Glide.with(holder.photo.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.photo);
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null){
+                    mOnItemClickListener.onItemRemoveClick(data);
+                }
+            }
+        });
+
+        Glide.with(holder.img.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.img);
     }
 
     //获取数据源总的条数
@@ -69,16 +82,19 @@ public class ChatRvAdapter extends RecyclerView.Adapter<ChatRvAdapter.MyHolder> 
      */
     class MyHolder extends RecyclerView.ViewHolder {
 
-        TextView name;
-        ImageView photo;
-        TextView msg;
+        TextView title;
+        ImageView img;
+        TextView price;
+        TextView seller;
+        Button remove;
 
         public MyHolder(View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.title);
-            photo = itemView.findViewById(R.id.photo);
-            msg = itemView.findViewById(R.id.img);
-
+            title = itemView.findViewById(R.id.title);
+            img = itemView.findViewById(R.id.img);
+            price = itemView.findViewById(R.id.price);
+            seller = itemView.findViewById(R.id.seller);
+            remove = itemView.findViewById(R.id.delete);
         }
     }
 }

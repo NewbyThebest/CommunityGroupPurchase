@@ -1,9 +1,12 @@
-package com.lwj.cgp;
+package com.lwj.cgp.base;
 
-class CommonData {
+import com.lwj.cgp.data.UserData;
+
+public class CommonData {
     private static CommonData mCommonData;
 
     private UserData mUserInfo = new UserData();
+    public static int type;
 
     private CommonData() {
 

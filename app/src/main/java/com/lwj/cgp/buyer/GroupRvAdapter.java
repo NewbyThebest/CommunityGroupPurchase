@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.buyer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.lwj.cgp.data.GoodsData;
+import com.lwj.cgp.R;
 
 import java.util.List;
 

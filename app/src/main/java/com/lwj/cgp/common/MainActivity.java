@@ -1,7 +1,6 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -12,6 +11,13 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.R;
+import com.lwj.cgp.buyer.CarFragment;
+import com.lwj.cgp.buyer.ChatFragment;
+import com.lwj.cgp.buyer.GroupFragment;
+import com.lwj.cgp.buyer.HomeFragment;
 
 import java.util.ArrayList;
 import java.util.List;

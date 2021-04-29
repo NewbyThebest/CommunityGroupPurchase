@@ -1,4 +1,7 @@
-package com.lwj.cgp;
+package com.lwj.cgp.base;
+
+import com.lwj.cgp.data.GoodsData;
+import com.lwj.cgp.data.UserData;
 
 import java.util.List;
 import java.util.Map;

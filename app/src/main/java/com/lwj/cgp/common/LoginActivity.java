@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,20 +10,28 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SwitchCompat;
 
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.base.CommonData;
+import com.lwj.cgp.base.Constants;
+import com.lwj.cgp.base.MainManager;
+import com.lwj.cgp.R;
+import com.lwj.cgp.data.UserData;
 import com.tencent.mmkv.MMKV;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observer;
@@ -44,6 +52,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private ImageView eye;
     private boolean isOpen;
     private int count;
+    private Spinner spinner;
 
 
     @Override
@@ -60,6 +69,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         userType = findViewById(R.id.userType);
         memoryPsw = findViewById(R.id.save_password);
         autoLogin = findViewById(R.id.auto_login);
+        spinner = findViewById(R.id.type);
+        List<String> types = new ArrayList<>();
+        types.add("业主模式");
+        types.add("商家模式");
+        types.add("管理模式");
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this,R.layout.spinner_list_item, types);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
         login.setOnClickListener(this);
         eye.setOnClickListener(this);
         signin.setOnClickListener(this);
@@ -72,6 +89,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             password.setText(psw);
             memoryPsw.setChecked(true);
         }
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                CommonData.type = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     void checkUserInfo(String etUser, String etPsw) {

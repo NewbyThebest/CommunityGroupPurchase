@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,16 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.lwj.cgp.base.BaseFragment;
+import com.lwj.cgp.R;
 import com.tencent.mmkv.MMKV;
 
-public class PersonFragment extends BaseFragment{
+public class PersonFragment extends BaseFragment {
     private ImageView photo;
     private TextView name;
     private TextView uid;
@@ -48,7 +49,7 @@ public class PersonFragment extends BaseFragment{
             @Override
             public void onClick(View v) {
                 MMKV.defaultMMKV().encode("auto",false);
-                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }

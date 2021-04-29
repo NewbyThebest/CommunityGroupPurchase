@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.buyer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.lwj.cgp.base.BaseFragment;
+import com.lwj.cgp.data.GoodsData;
+import com.lwj.cgp.R;
 import com.zhouwei.mzbanner.MZBannerView;
 import com.zhouwei.mzbanner.holder.MZHolderCreator;
 import com.zhouwei.mzbanner.holder.MZViewHolder;
@@ -21,7 +24,7 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment {
     private MZBannerView mMZBanner;
     private List<GoodsData> mBanners = new ArrayList<>();
     private List<GoodsData> mListData = new ArrayList<>();
@@ -77,7 +80,7 @@ public class HomeFragment extends BaseFragment{
         mHomeRvAdapter.setOnItemClickListener(new HomeRvAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(GoodsData data) {
-                Intent intent = new Intent(getActivity(),GoodsDetailActivity.class);
+                Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
                 startActivity(intent);
             }
         });

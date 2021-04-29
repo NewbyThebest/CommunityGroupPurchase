@@ -1,4 +1,4 @@
-package com.lwj.cgp;
+package com.lwj.cgp.common;
 
 import android.Manifest;
 import android.content.Intent;
@@ -12,6 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.base.CommonData;
+import com.lwj.cgp.base.MainManager;
+import com.lwj.cgp.data.UserData;
 import com.tencent.mmkv.MMKV;
 
 import java.util.HashMap;
