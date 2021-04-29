@@ -11,7 +11,7 @@ import rx.Observable;
 public interface ApiInterface {
     @FormUrlEncoded
     @POST("CheckUserInfo")
-    Observable<GoodsData> checkUserInfo(@FieldMap Map<String,  String> map);
+    Observable<UserData> checkUserInfo(@FieldMap Map<String,  String> map);
 
     @FormUrlEncoded
     @POST("addUserInfo")

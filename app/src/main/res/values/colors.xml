@@ -11,5 +11,7 @@
     <color name="red_E53935">#E53935</color>
     <color name="gray_ADADAD">#ADADAD</color>
     <color name="gray_F0F0F0">#F0F0F0</color>
+    <color name="gray_E0E0E0">#E0E0E0</color>
     <color name="gray_FCFCFC">#FCFCFC</color>
+    <color name="yellow_FFFFAA">#FFFFAA</color>
 </resources>

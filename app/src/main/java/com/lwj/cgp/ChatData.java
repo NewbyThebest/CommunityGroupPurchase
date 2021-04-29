@@ -1,5 +1,5 @@
 package com.lwj.cgp;
 
-public class GoodsData {
+public class ChatData {
     public String imgUrl;
 }

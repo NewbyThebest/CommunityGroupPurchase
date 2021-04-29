@@ -18,7 +18,7 @@
         android:id="@+id/btnOk"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_ok_btn"
+        android:background="@drawable/selector_ok_radiu_btn"
         android:textColor="@color/white"
         android:textSize="18sp" />
 

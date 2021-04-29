@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/selector_ok_btn"
+        android:background="@drawable/selector_ok_radiu_btn"
         android:text="登录"
         android:textSize="18sp"
         android:textColor="@color/white"

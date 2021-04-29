@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.mob.sdk'
 }
 
 android {
@@ -28,6 +29,16 @@ android {
     }
 }
 
+MobSDK {
+    appKey "330dd4dd66598"
+    appSecret "ae5f35c0c13134ce13caafb507819251"
+    SMSSDK {}
+    permissions {
+        exclude "android.permission.READ_SMS","android.permission.RECEIVE_SMS"
+
+    }
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -43,6 +54,9 @@ dependencies {
     implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     // fragment快速实现（可选）
     implementation 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+
+    implementation 'com.github.pinguo-zhouwei:MZBannerView:v2.0.2'
+
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
@@ -62,4 +76,9 @@ dependencies {
     //Rxjava
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+
+    //mmkv存储
+    implementation 'com.tencent:mmkv-static:1.2.7'
+
+    implementation 'com.google.code.gson:gson:2.8.6'
 }
