@@ -1,4 +1,4 @@
-package com.lwj.cgp.buyer;
+package com.lwj.cgp.common;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lwj.cgp.base.BaseFragment;
+import com.lwj.cgp.buyer.BuyerGoodsDetailActivity;
 import com.lwj.cgp.data.ChatData;
 import com.lwj.cgp.R;
 
@@ -58,7 +59,7 @@ public class ChatFragment extends BaseFragment {
         mChatRvAdapter.setOnItemClickListener(new ChatRvAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(ChatData data) {
-                Intent intent = new Intent(getActivity(), GoodsDetailActivity.class);
+                Intent intent = new Intent(getActivity(), BuyerGoodsDetailActivity.class);
                 startActivity(intent);
             }
         });

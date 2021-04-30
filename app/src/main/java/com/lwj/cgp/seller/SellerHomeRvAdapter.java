@@ -1,26 +1,25 @@
-package com.lwj.cgp.buyer;
+package com.lwj.cgp.seller;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.lwj.cgp.data.GoodsData;
 import com.lwj.cgp.R;
+import com.lwj.cgp.data.GoodsData;
 
 import java.util.List;
 
-public class GroupRvAdapter extends RecyclerView.Adapter<GroupRvAdapter.MyHolder> {
+public class SellerHomeRvAdapter extends RecyclerView.Adapter<SellerHomeRvAdapter.MyHolder> {
 
     private List<GoodsData> mList;
     private OnItemClickListener mOnItemClickListener;
 
-    public GroupRvAdapter(List<GoodsData> list) {
+    public SellerHomeRvAdapter(List<GoodsData> list) {
         mList = list;
     }
 
@@ -39,7 +38,7 @@ public class GroupRvAdapter extends RecyclerView.Adapter<GroupRvAdapter.MyHolder
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_group, parent, false);
+                .inflate(R.layout.item_home, parent, false);
         MyHolder holder = new MyHolder(view);
 
         return holder;
@@ -56,7 +55,9 @@ public class GroupRvAdapter extends RecyclerView.Adapter<GroupRvAdapter.MyHolder
                 }
             }
         });
-        Glide.with(holder.photo.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.photo);
+        holder.title.setText(data.title);
+        holder.price.setText("￥"+data.price);
+        holder.seller.setText(data.detail);
         Glide.with(holder.img.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.img);
     }
 
@@ -73,22 +74,16 @@ public class GroupRvAdapter extends RecyclerView.Adapter<GroupRvAdapter.MyHolder
     class MyHolder extends RecyclerView.ViewHolder {
 
         TextView title;
-        ImageView photo;
         ImageView img;
         TextView price;
-        TextView peopleCount;
-        TextView time;
-        Button go;
+        TextView seller;
 
         public MyHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
-            photo = itemView.findViewById(R.id.photo);
             img = itemView.findViewById(R.id.img);
             price = itemView.findViewById(R.id.price);
-            peopleCount = itemView.findViewById(R.id.people_count);
-            time = itemView.findViewById(R.id.time);
-            go = itemView.findViewById(R.id.go_group);
+            seller = itemView.findViewById(R.id.seller);
         }
     }
 }

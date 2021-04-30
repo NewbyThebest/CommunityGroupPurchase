@@ -14,8 +14,11 @@ import androidx.core.content.ContextCompat;
 
 import com.lwj.cgp.base.BaseActivity;
 import com.lwj.cgp.base.CommonData;
+import com.lwj.cgp.base.Constants;
 import com.lwj.cgp.base.MainManager;
+import com.lwj.cgp.buyer.BuyerMainActivity;
 import com.lwj.cgp.data.UserData;
+import com.lwj.cgp.seller.SellerMainActivity;
 import com.tencent.mmkv.MMKV;
 
 import java.util.HashMap;
@@ -51,20 +54,36 @@ public class SplashActivity extends BaseActivity {
         boolean isAutoLogin = MMKV.defaultMMKV().getBoolean("auto", false);
         String uid = MMKV.defaultMMKV().getString("uid", "");
         String psw = MMKV.defaultMMKV().getString("password", "");
+        int type = MMKV.defaultMMKV().getInt("type", 0);
+        CommonData.type = type;
         if (isAutoLogin) {
-            checkUserInfo(uid, psw);
+            checkUserInfo(uid, psw, type);
         }else {
-            Intent intent = new Intent(this, LoginActivity.class);
+            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
-    void checkUserInfo(String etUser, String etPsw) {
+    void jumpToMain(){
+        Intent intent = new Intent(this, BuyerMainActivity.class);
+        if (CommonData.type == Constants.SELLER) {
+            intent = new Intent(this, SellerMainActivity.class);
+        } else if (CommonData.type == Constants.ADMIN) {
+
+        } else {
+            intent = new Intent(this, BuyerMainActivity.class);
+        }
+        startActivity(intent);
+        finish();
+    }
+
+    void checkUserInfo(String etUser, String etPsw,int type) {
 
         Map<String, String> map = new HashMap<>();
         map.put("uid", etUser);
         map.put("password", etPsw);
-        map.put("type", "0");
+        map.put("type", String.valueOf(type));
         MainManager.getInstance().getNetService().checkUserInfo(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,9 +101,7 @@ public class SplashActivity extends BaseActivity {
                     public void onNext(UserData result) {
                         if (result != null && !TextUtils.isEmpty(result.uid)) {
                             CommonData.getCommonData().setUserInfo(result);
-                            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                           jumpToMain();
                         }
                     }
                 });

@@ -25,6 +25,10 @@ public interface ApiInterface {
     Observable<Boolean> updateUserInfo(@FieldMap Map<String,  String> map);
 
     @FormUrlEncoded
+    @POST("crateGroupOrder")
+    Observable<Boolean> crateGroupOrder(@FieldMap Map<String,  String> map);
+
+    @FormUrlEncoded
     @POST("uoloadImg")
     Observable<GoodsData> uploadImg(@FieldMap Map<String,  String> map);
 
@@ -43,6 +47,17 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("queryBannerGoods")
     Observable<List<GoodsData>> queryBannerGoods(@FieldMap Map<String,  String> map);
+
+
+    /**
+     * 查询商家的轮播图商品信息
+     * @param map
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("querySellerBannerGoods")
+    Observable<List<GoodsData>> querySellerBannerGoods(@FieldMap Map<String,  String> map);
+
 
     @FormUrlEncoded
     @POST("addGoodsInfo")

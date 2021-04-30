@@ -1,10 +1,4 @@
-package com.lwj.cgp.common;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+package com.lwj.cgp.seller;
 
 import android.os.Bundle;
 import android.view.View;
@@ -12,33 +6,36 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.lwj.cgp.base.BaseActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.lwj.cgp.R;
-import com.lwj.cgp.buyer.CarFragment;
-import com.lwj.cgp.buyer.ChatFragment;
-import com.lwj.cgp.buyer.GroupFragment;
-import com.lwj.cgp.buyer.HomeFragment;
+import com.lwj.cgp.base.BaseActivity;
+import com.lwj.cgp.common.ChatFragment;
+import com.lwj.cgp.buyer.BuyerGroupFragment;
+import com.lwj.cgp.buyer.BuyerHomeFragment;
+import com.lwj.cgp.common.PersonFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener {
+public class SellerMainActivity extends BaseActivity implements View.OnClickListener {
 
     private LinearLayout mTabHome;
-    private LinearLayout mTabGroup;
-    private LinearLayout mTabCar;
+    private LinearLayout mTabDeal;
     private LinearLayout mTabChat;
     private LinearLayout mTabPerson;
 
     private ImageButton mIBHome;
-    private ImageButton mIBGroup;
-    private ImageButton mIBCar;
+    private ImageButton mIBDeal;
     private ImageButton mIBChat;
     private ImageButton mIBPerson;
 
     private TextView mTvHome;
-    private TextView mTvGroup;
-    private TextView mTvCar;
+    private TextView mTvDeal;
     private TextView mTvChat;
     private TextView mTvPerson;
 
@@ -49,7 +46,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_seller_main);
         initView();
         initClickListener();
     }
@@ -59,27 +56,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mViewPager = (ViewPager) findViewById(R.id.tab_main_viewpager);
 
         mTabHome = (LinearLayout) findViewById(R.id.tab_home);
-        mTabGroup = (LinearLayout) findViewById(R.id.tab_group);
-        mTabCar = (LinearLayout) findViewById(R.id.tab_car);
-        mTabChat = (LinearLayout) findViewById(R.id.tab_chat);
+        mTabDeal = (LinearLayout) findViewById(R.id.tab_group);
         mTabPerson = (LinearLayout) findViewById(R.id.tab_person);
+        mTabChat = (LinearLayout) findViewById(R.id.tab_chat);
 
         mIBHome = (ImageButton) findViewById(R.id.ib_home);
-        mIBGroup = (ImageButton) findViewById(R.id.ib_group);
-        mIBCar = (ImageButton) findViewById(R.id.ib_car);
+        mIBDeal = (ImageButton) findViewById(R.id.ib_group);
         mIBChat = (ImageButton) findViewById(R.id.ib_chat);
         mIBPerson = (ImageButton) findViewById(R.id.ib_person);
 
+
         mTvHome = (TextView) findViewById(R.id.tv_home);
-        mTvGroup = (TextView) findViewById(R.id.tv_group);
-        mTvCar = (TextView) findViewById(R.id.tv_car);
+        mTvDeal = (TextView) findViewById(R.id.tv_group);
         mTvChat = (TextView) findViewById(R.id.tv_chat);
         mTvPerson = (TextView) findViewById(R.id.tv_person);
 
         mFragments = new ArrayList<Fragment>();
-        mFragments.add(new HomeFragment());
-        mFragments.add(new GroupFragment());
-        mFragments.add(new CarFragment());
+        mFragments.add(new SellerHomeFragment());
+        mFragments.add(new BuyerGroupFragment());
         mFragments.add(new ChatFragment());
         mFragments.add(new PersonFragment());
 
@@ -101,18 +95,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         mTvHome.setTextColor(getResources().getColor(R.color.red_B71C1C));
                         break;
                     case 1:
-                        mIBGroup.setBackgroundResource(R.drawable.group_red_900_24dp);
-                        mTvGroup.setTextColor(getResources().getColor(R.color.red_B71C1C));
+                        mIBDeal.setBackgroundResource(R.drawable.assessment_red_900_24dp);
+                        mTvDeal.setTextColor(getResources().getColor(R.color.red_B71C1C));
                         break;
                     case 2:
-                        mIBCar.setBackgroundResource(R.drawable.add_shopping_cart_red_900_24dp);
-                        mTvCar.setTextColor(getResources().getColor(R.color.red_B71C1C));
-                        break;
-                    case 3:
                         mIBChat.setBackgroundResource(R.drawable.chat_red_900_24dp);
                         mTvChat.setTextColor(getResources().getColor(R.color.red_B71C1C));
                         break;
-                    case 4:
+                    case 3:
                         mIBPerson.setBackgroundResource(R.drawable.person_red_900_24dp);
                         mTvPerson.setTextColor(getResources().getColor(R.color.red_B71C1C));
                         break;
@@ -130,22 +120,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void initClickListener() {
         mTabHome.setOnClickListener(this);
-        mTabGroup.setOnClickListener(this);
-        mTabCar.setOnClickListener(this);
+        mTabDeal.setOnClickListener(this);
         mTabChat.setOnClickListener(this);
         mTabPerson.setOnClickListener(this);
     }
 
     private void initTabImage() {
         mIBHome.setBackgroundResource(R.drawable.home_black_24dp);
-        mIBGroup.setBackgroundResource(R.drawable.group_black_24dp);
-        mIBCar.setBackgroundResource(R.drawable.add_shopping_cart_black_24dp);
+        mIBDeal.setBackgroundResource(R.drawable.assessment_black_24dp);
         mIBChat.setBackgroundResource(R.drawable.chat_black_24dp);
         mIBPerson.setBackgroundResource(R.drawable.person_black_24dp);
 
         mTvHome.setTextColor(getResources().getColor(R.color.black));
-        mTvGroup.setTextColor(getResources().getColor(R.color.black));
-        mTvCar.setTextColor(getResources().getColor(R.color.black));
+        mTvDeal.setTextColor(getResources().getColor(R.color.black));
         mTvChat.setTextColor(getResources().getColor(R.color.black));
         mTvPerson.setTextColor(getResources().getColor(R.color.black));
     }
@@ -159,14 +146,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.tab_group:
                 setSelect(1);
                 break;
-            case R.id.tab_car:
+            case R.id.tab_chat:
                 setSelect(2);
                 break;
-            case R.id.tab_chat:
-                setSelect(3);
-                break;
             case R.id.tab_person:
-                setSelect(4);
+                setSelect(3);
                 break;
             default:
         }
@@ -181,18 +165,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 mTvHome.setTextColor(getResources().getColor(R.color.red_B71C1C));
                 break;
             case 1:
-                mIBGroup.setBackgroundResource(R.drawable.group_red_900_24dp);
-                mTvGroup.setTextColor(getResources().getColor(R.color.red_B71C1C));
+                mIBDeal.setBackgroundResource(R.drawable.assessment_red_900_24dp);
+                mTvDeal.setTextColor(getResources().getColor(R.color.red_B71C1C));
                 break;
             case 2:
-                mIBCar.setBackgroundResource(R.drawable.add_shopping_cart_red_900_24dp);
-                mTvCar.setTextColor(getResources().getColor(R.color.red_B71C1C));
-                break;
-            case 3:
                 mIBChat.setBackgroundResource(R.drawable.chat_red_900_24dp);
                 mTvChat.setTextColor(getResources().getColor(R.color.red_B71C1C));
                 break;
-            case 4:
+            case 3:
                 mIBPerson.setBackgroundResource(R.drawable.person_red_900_24dp);
                 mTvPerson.setTextColor(getResources().getColor(R.color.red_B71C1C));
                 break;

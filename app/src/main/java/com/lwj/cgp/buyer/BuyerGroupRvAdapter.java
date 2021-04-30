@@ -15,12 +15,12 @@ import com.lwj.cgp.R;
 
 import java.util.List;
 
-public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
+public class BuyerGroupRvAdapter extends RecyclerView.Adapter<BuyerGroupRvAdapter.MyHolder> {
 
     private List<GoodsData> mList;
     private OnItemClickListener mOnItemClickListener;
 
-    public CarRvAdapter(List<GoodsData> list) {
+    public BuyerGroupRvAdapter(List<GoodsData> list) {
         mList = list;
     }
 
@@ -30,7 +30,6 @@ public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
 
     public interface OnItemClickListener{
         public void onItemClick(GoodsData data);
-        public void onItemRemoveClick(GoodsData data);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -40,7 +39,7 @@ public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_car, parent, false);
+                .inflate(R.layout.item_group, parent, false);
         MyHolder holder = new MyHolder(view);
 
         return holder;
@@ -57,16 +56,7 @@ public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
                 }
             }
         });
-
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null){
-                    mOnItemClickListener.onItemRemoveClick(data);
-                }
-            }
-        });
-
+        Glide.with(holder.photo.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.photo);
         Glide.with(holder.img.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.img);
     }
 
@@ -83,18 +73,22 @@ public class CarRvAdapter extends RecyclerView.Adapter<CarRvAdapter.MyHolder> {
     class MyHolder extends RecyclerView.ViewHolder {
 
         TextView title;
+        ImageView photo;
         ImageView img;
         TextView price;
-        TextView seller;
-        Button remove;
+        TextView peopleCount;
+        TextView time;
+        Button go;
 
         public MyHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
+            photo = itemView.findViewById(R.id.photo);
             img = itemView.findViewById(R.id.img);
             price = itemView.findViewById(R.id.price);
-            seller = itemView.findViewById(R.id.seller);
-            remove = itemView.findViewById(R.id.delete);
+            peopleCount = itemView.findViewById(R.id.people_count);
+            time = itemView.findViewById(R.id.time);
+            go = itemView.findViewById(R.id.go_group);
         }
     }
 }

@@ -26,7 +26,9 @@ import com.lwj.cgp.base.CommonData;
 import com.lwj.cgp.base.Constants;
 import com.lwj.cgp.base.MainManager;
 import com.lwj.cgp.R;
+import com.lwj.cgp.buyer.BuyerMainActivity;
 import com.lwj.cgp.data.UserData;
+import com.lwj.cgp.seller.SellerMainActivity;
 import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
@@ -74,9 +76,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         types.add("业主模式");
         types.add("商家模式");
         types.add("管理模式");
-        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this,R.layout.spinner_list_item, types);
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, R.layout.spinner_list_item, types);
         spinner.setAdapter(adapter);
-        spinner.setSelection(0);
+
         login.setOnClickListener(this);
         eye.setOnClickListener(this);
         signin.setOnClickListener(this);
@@ -89,6 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             password.setText(psw);
             memoryPsw.setChecked(true);
         }
+        spinner.setSelection(CommonData.type);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -115,7 +118,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         Map<String, String> map = new HashMap<>();
         map.put("uid", etUser);
         map.put("password", etPsw);
-        map.put("type", "0");
+        map.put("type", String.valueOf(CommonData.type));
         MainManager.getInstance().getNetService().checkUserInfo(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -135,23 +138,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             if (memoryPsw.isChecked()) {
                                 MMKV.defaultMMKV().encode("uid", result.uid);
                                 MMKV.defaultMMKV().encode("password", result.password);
+                                MMKV.defaultMMKV().encode("type", CommonData.type);
                             } else {
                                 MMKV.defaultMMKV().encode("uid", "");
                                 MMKV.defaultMMKV().encode("password", "");
+                                MMKV.defaultMMKV().encode("type", 0);
                             }
 
                             if (autoLogin.isChecked()) {
                                 MMKV.defaultMMKV().encode("uid", result.uid);
                                 MMKV.defaultMMKV().encode("password", result.password);
                                 MMKV.defaultMMKV().encode("auto", true);
+                                MMKV.defaultMMKV().encode("type", CommonData.type);
                             } else {
                                 MMKV.defaultMMKV().encode("auto", false);
                             }
 
                             CommonData.getCommonData().setUserInfo(result);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                            jumpToMain();
                         } else {
                             Toast.makeText(LoginActivity.this, "账号或密码错误，请重新输入！", Toast.LENGTH_LONG).show();
                         }
@@ -159,6 +163,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 });
 
+    }
+
+    void jumpToMain() {
+        Intent intent = new Intent(LoginActivity.this, BuyerMainActivity.class);
+        if (CommonData.type == Constants.SELLER) {
+            intent = new Intent(LoginActivity.this, SellerMainActivity.class);
+        } else if (CommonData.type == Constants.ADMIN) {
+
+        } else {
+            intent = new Intent(LoginActivity.this, BuyerMainActivity.class);
+        }
+        startActivity(intent);
+        finish();
     }
 
     @Override

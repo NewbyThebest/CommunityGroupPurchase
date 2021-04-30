@@ -18,4 +18,7 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:background">@color/red_B71C1C</item>
     </style>
+
+    <style name="dialogStyle"
+        parent="Theme.AppCompat.DayNight.Dialog.Alert"></style>
 </resources>

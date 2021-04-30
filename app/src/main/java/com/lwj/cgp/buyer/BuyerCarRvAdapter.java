@@ -3,6 +3,7 @@ package com.lwj.cgp.buyer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,12 +15,12 @@ import com.lwj.cgp.R;
 
 import java.util.List;
 
-public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> {
+public class BuyerCarRvAdapter extends RecyclerView.Adapter<BuyerCarRvAdapter.MyHolder> {
 
     private List<GoodsData> mList;
     private OnItemClickListener mOnItemClickListener;
 
-    public HomeRvAdapter(List<GoodsData> list) {
+    public BuyerCarRvAdapter(List<GoodsData> list) {
         mList = list;
     }
 
@@ -29,6 +30,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> 
 
     public interface OnItemClickListener{
         public void onItemClick(GoodsData data);
+        public void onItemRemoveClick(GoodsData data);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -38,7 +40,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_home, parent, false);
+                .inflate(R.layout.item_car, parent, false);
         MyHolder holder = new MyHolder(view);
 
         return holder;
@@ -55,6 +57,16 @@ public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> 
                 }
             }
         });
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null){
+                    mOnItemClickListener.onItemRemoveClick(data);
+                }
+            }
+        });
+
         Glide.with(holder.img.getContext()).load(mList.get(position).imgUrl).placeholder(R.drawable.img_default).into(holder.img);
     }
 
@@ -74,6 +86,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> 
         ImageView img;
         TextView price;
         TextView seller;
+        Button remove;
 
         public MyHolder(View itemView) {
             super(itemView);
@@ -81,6 +94,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter<HomeRvAdapter.MyHolder> 
             img = itemView.findViewById(R.id.img);
             price = itemView.findViewById(R.id.price);
             seller = itemView.findViewById(R.id.seller);
+            remove = itemView.findViewById(R.id.delete);
         }
     }
 }

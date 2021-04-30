@@ -1,4 +1,4 @@
-package com.lwj.cgp.buyer;
+package com.lwj.cgp.common;
 
 import android.view.LayoutInflater;
 import android.view.View;
